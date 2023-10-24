@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s -f .docker-compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: static-app
+  name: static-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: static-app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s -f .docker-compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/deploy-app-k8s-default: "true"
+        io.kompose.service: static-app
+    spec:
+      containers:
+        - image: evandjefie/my-static-portfolio:1.0.1
+          name: my-static-portfolio
+          ports:
+            - containerPort: 80
+              hostPort: 8083
+              protocol: TCP
+          resources: {}
+          securityContext:
+            privileged: true
+            runAsUser: 0
+      restartPolicy: Always
+status: {}

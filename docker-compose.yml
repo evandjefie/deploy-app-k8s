@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  static-app:
+    build:
+      context: app/.
+      dockerfile: Dockerfile
+    image: ${ORGANIZATION_NAME}/${APP_NAME}:${TAG_VERSION}
+    container_name: ${APP_NAME}
+    ports:
+      - "8083:80"
+    user: "0"
+    privileged: true
