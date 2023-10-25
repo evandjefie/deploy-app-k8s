@@ -17,6 +17,7 @@ Clone project
 ```bash
   git clone https://github.com/evandjefie/deploy-app-k8s.git
   cd deploy-app-k8s
+```
 
 Run script according your choice
 
